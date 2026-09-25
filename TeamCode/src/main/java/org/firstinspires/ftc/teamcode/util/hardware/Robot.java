@@ -4,11 +4,6 @@ import com.qualcomm.hardware.rev.*;
 import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.robotcore.external.navigation.*;
 
-import java.util.Arrays;
-
-import static org.firstinspires.ftc.teamcode.util.hardware.Rotator.*;
-//import org.firstinspires.ftc.teamcode.util.structs.ComparableCircularList;
-
 public class Robot {
     private final DcMotor leftFrontDrive,leftBackDrive,rightFrontDrive,rightBackDrive;
 
