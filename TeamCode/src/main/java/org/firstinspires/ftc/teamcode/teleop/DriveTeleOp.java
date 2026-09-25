@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.util.OpModeBase;
-import org.firstinspires.ftc.teamcode.util.hardware.DriveTrain;
 
 @TeleOp(name = "Basic Driving Teleop")
 public class DriveTeleOp extends OpModeBase {
