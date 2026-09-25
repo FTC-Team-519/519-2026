@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.util.commands.actions;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import org.firstinspires.ftc.teamcode.util.hardware.DriveTrain;
 import org.firstinspires.ftc.teamcode.util.hardware.Robot;
 import org.firstinspires.ftc.teamcode.util.RobotMath;
 import org.firstinspires.ftc.teamcode.util.commands.Command;
@@ -12,19 +13,19 @@ public class DriveInDirection implements Command {
 
     //from 0 to 2PI
     private final double direction;
-    private final Robot robot;
+    private final DriveTrain driveTrain;
 
     public DriveInDirection(double inches, double direction, Robot robot) {
         this.direction = RobotMath.trueMod(direction, (Math.PI * 2));
-        this.robot = robot;
-        this.distance = inches * Robot.getCountsPerInchForDriveMotors();
+        this.driveTrain = robot.getDriveTrain();
+        this.distance = inches * DriveTrain.getCountsPerInchForDriveMotors();
     }
 
     @Override
     public void init() {
-        this.robot.setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        this.robot.setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        this.robot.setDriveTargetPosition((int) distance); //we might need to tweak this value a bit
+        this.driveTrain.setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.driveTrain.setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.driveTrain.setDriveTargetPosition((int) distance); //we might need to tweak this value a bit
     }
 
     @Override
@@ -44,25 +45,25 @@ public class DriveInDirection implements Command {
         lb_power /= scale;
         rb_power /= scale;
 
-        robot.setLeftFrontPower(lf_power);
-        robot.setRightFrontPower(rf_power);
-        robot.setLeftBackPower(lb_power);
-        robot.setRightBackPower(rb_power);
+        driveTrain.setLeftFrontPower(lf_power);
+        driveTrain.setRightFrontPower(rf_power);
+        driveTrain.setLeftBackPower(lb_power);
+        driveTrain.setRightBackPower(rb_power);
     }
 
     @Override
     public boolean isDone() {
-        return Math.abs(robot.getLeftFrontDrive().getCurrentPosition()) >= Math.abs(robot.getLeftFrontDrive().getTargetPosition()) ||
-                Math.abs(robot.getRightFrontDrive().getCurrentPosition()) >= Math.abs(robot.getRightFrontDrive().getTargetPosition()) ||
-                Math.abs(robot.getLeftBackDrive().getCurrentPosition()) >= Math.abs(robot.getLeftBackDrive().getTargetPosition()) ||
-                Math.abs(robot.getRightBackDrive().getCurrentPosition()) >= Math.abs(robot.getRightBackDrive().getTargetPosition());
+        return Math.abs(driveTrain.getLeftFrontDrive().getCurrentPosition()) >= Math.abs(driveTrain.getLeftFrontDrive().getTargetPosition()) ||
+                Math.abs(driveTrain.getRightFrontDrive().getCurrentPosition()) >= Math.abs(driveTrain.getRightFrontDrive().getTargetPosition()) ||
+                Math.abs(driveTrain.getLeftBackDrive().getCurrentPosition()) >= Math.abs(driveTrain.getLeftBackDrive().getTargetPosition()) ||
+                Math.abs(driveTrain.getRightBackDrive().getCurrentPosition()) >= Math.abs(driveTrain.getRightBackDrive().getTargetPosition());
     }
 
     @Override
     public void shutdown() {
-        this.robot.setAllDrivePower(0.0);
-        this.robot.setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        this.robot.setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.driveTrain.setAllDrivePower(0.0);
+        this.driveTrain.setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.driveTrain.setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public final static double FORWARDS = (Math.PI / 2.0);
