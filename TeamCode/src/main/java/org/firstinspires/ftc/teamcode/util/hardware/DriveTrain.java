@@ -129,9 +129,6 @@ public class DriveTrain {
         rightBackDrive.setPower(speed);
     }
 
-
-
-
     public boolean atDriveTargetPosition(int epsilon) {
         return Math.abs(leftFrontDrive.getCurrentPosition()-leftFrontDrive.getTargetPosition())<=epsilon &&
                 Math.abs(rightFrontDrive.getCurrentPosition()-rightFrontDrive.getTargetPosition())<=epsilon &&
@@ -160,5 +157,30 @@ public class DriveTrain {
                 rightFrontDrive.getCurrentPosition() <= rightFrontDrive.getTargetPosition() &&
                 leftBackDrive.getCurrentPosition() <= leftBackDrive.getTargetPosition() &&
                 rightBackDrive.getCurrentPosition() <= rightBackDrive.getTargetPosition());
+    }
+
+    public void drive(double x, double y, double rot){
+        double lf_power = y + x + rot;
+        double rf_power = y - x - rot;
+        double lb_power = y - x + rot;
+        double rb_power = y + x - rot;
+
+        double max = 0.0;
+        max = Math.max(Math.abs(lf_power), Math.abs(rf_power));
+        max = Math.max(max, Math.abs(lb_power));
+        max = Math.max(max, Math.abs(rb_power));
+
+        if (max > 1.0) {
+            lf_power /= max;
+            rf_power /= max;
+            lb_power /= max;
+            rb_power /= max;
+        }
+
+
+        this.setLeftFrontPower(lf_power);
+        this.setRightFrontPower(rf_power);
+        this.setLeftBackPower(lb_power);
+        this.setRightBackPower(rb_power);
     }
 }
