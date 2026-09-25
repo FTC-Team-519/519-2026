@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
 import org.firstinspires.ftc.teamcode.util.OpModeBase;
+import org.firstinspires.ftc.teamcode.util.hardware.DriveTrain;
 
 public class DriveTeleop extends OpModeBase {
     @Override
@@ -38,9 +39,11 @@ public class DriveTeleop extends OpModeBase {
             rb_power /= max;
         }
 
-        robot.setLeftFrontPower(lf_power);
-        robot.setRightFrontPower(rf_power);
-        robot.setLeftBackPower(lb_power);
-        robot.setRightBackPower(rb_power);
+        DriveTrain driveTrain = robot.getDriveTrain();
+
+        driveTrain.setLeftFrontPower(lf_power);
+        driveTrain.setRightFrontPower(rf_power);
+        driveTrain.setLeftBackPower(lb_power);
+        driveTrain.setRightBackPower(rb_power);
     }
 }
