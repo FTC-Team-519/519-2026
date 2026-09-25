@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.util.OpModeBase;
 import org.firstinspires.ftc.teamcode.util.hardware.DriveTrain;
 
-public class DriveTeleop extends OpModeBase {
+@TeleOp(name = "Basic Driving Teleop")
+public class DriveTeleOp extends OpModeBase {
     @Override
     public void loop() {
         handle_driving();
