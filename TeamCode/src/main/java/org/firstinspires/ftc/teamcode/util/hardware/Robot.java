@@ -4,6 +4,7 @@ import com.qualcomm.hardware.rev.*;
 import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.robotcore.external.navigation.*;
 
+//KITBOTTT!!
 public class Robot {
     private final DriveTrain driveTrain;
     private final IMU_Wrapper imu_wrapper;
