@@ -4,49 +4,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class DriveTrain {
-    private final DcMotor leftFrontDrive,leftBackDrive,rightFrontDrive,rightBackDrive;
+    private final DcMotor leftDrive, rightDrive;
 
     public DriveTrain(HardwareMap hardwareMap) {
-        leftFrontDrive = hardwareMap.get(DcMotor.class, "leftFront");
-        leftBackDrive = hardwareMap.get(DcMotor.class, "leftBack");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightFront");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "rightBack");
+        //TODO: figure out the actual names
+        leftDrive = hardwareMap.get(DcMotor.class, "left");
+        rightDrive = hardwareMap.get(DcMotor.class, "right");
 
-        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
-    }
-
-
-    public void setLeftFrontPower(double power) {
-        leftFrontDrive.setPower(power);
-    }
-    public void setLeftBackPower(double power) {
-        leftBackDrive.setPower(power);
-    }
-    public void setRightFrontPower(double power) {
-        rightFrontDrive.setPower(power);
-    }
-    public void setRightBackPower(double power) {
-        rightBackDrive.setPower(power);
-    }
-    public DcMotor getLeftFrontDrive() {
-        return leftFrontDrive;
-    }
-    public DcMotor getLeftBackDrive() {
-        return leftBackDrive;
-    }
-    public DcMotor getRightFrontDrive() {
-        return rightFrontDrive;
-    }
-    public DcMotor getRightBackDrive() {
-        return rightBackDrive;
-    }
-
-    public boolean isTargetPositionsForDriveMotorsSet(int position) {
-        return(leftFrontDrive.getTargetPosition()==position && leftBackDrive.getTargetPosition()==position &&
-                rightFrontDrive.getTargetPosition()==position && rightBackDrive.getTargetPosition()==position);
+        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightDrive.setDirection(DcMotor.Direction.FORWARD);
     }
 
     public static double getCountsPerInchForDriveMotors() {
@@ -57,82 +23,12 @@ public class DriveTrain {
     }
 
     public void setDriveMode(DcMotor.RunMode mode) {
-        leftFrontDrive.setMode(mode);
-        rightFrontDrive.setMode(mode);
-        leftBackDrive.setMode(mode);
-        rightBackDrive.setMode(mode);
+        leftDrive.setMode(mode);
+        rightDrive.setMode(mode);
     }
-
-    public void setLeftDrivePower(double power) {
-        leftFrontDrive.setPower(power);
-        leftBackDrive.setPower(power);
-    }
-
-    public void setRightDrivePower(double power) {
-        rightFrontDrive.setPower(power);
-        rightBackDrive.setPower(power);
-    }
-
     public void setAllDrivePower(double power) {
-        setLeftDrivePower(power);
-        setRightDrivePower(power);
-    }
-
-    public void setStrafeLeftPower(double power){
-        leftFrontDrive.setPower(-power);
-        leftBackDrive.setPower(power);
-        rightFrontDrive.setPower(power);
-        rightBackDrive.setPower(-power);
-    }
-
-    public void setStrafeRightPower(double power){
-        leftFrontDrive.setPower(power);
-        leftBackDrive.setPower(-power);
-        rightFrontDrive.setPower(-power);
-        rightBackDrive.setPower(power);
-    }
-
-    public void setRotationClockwiseReset(int pos) {
-        leftFrontDrive.setTargetPosition(leftFrontDrive.getCurrentPosition()-pos);
-        leftBackDrive.setTargetPosition(leftBackDrive.getCurrentPosition()-pos);
-        rightFrontDrive.setTargetPosition(rightFrontDrive.getCurrentPosition()+pos);
-        rightBackDrive.setTargetPosition(rightBackDrive.getCurrentPosition()+pos);
-        setDriveMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
-
-    public void setRotationClockwise(int pos) {
-        leftFrontDrive.setTargetPosition(leftFrontDrive.getCurrentPosition()-pos);
-        leftBackDrive.setTargetPosition(leftBackDrive.getCurrentPosition()-pos);
-        rightFrontDrive.setTargetPosition(rightFrontDrive.getCurrentPosition()+pos);
-        rightBackDrive.setTargetPosition(rightBackDrive.getCurrentPosition()+pos);
-    }
-
-    public void setDriveTargetPosition(int position) {
-        leftFrontDrive.setTargetPosition(position);
-        rightFrontDrive.setTargetPosition(position);
-        leftBackDrive.setTargetPosition(position);
-        rightBackDrive.setTargetPosition(position);
-    }
-
-    public void rotateClockwise(double speed) {
-        leftFrontDrive.setPower(speed);
-        rightFrontDrive.setPower(-speed);
-        leftBackDrive.setPower(speed);
-        rightBackDrive.setPower(-speed);
-    }
-
-    public void rotateCounterClockwise(double speed) {
-        leftFrontDrive.setPower(-speed);
-        rightFrontDrive.setPower(speed);
-        leftBackDrive.setPower(-speed);
-        rightBackDrive.setPower(speed);
-    }
-
-    public boolean atDriveTargetPosition(int epsilon) {
-        return Math.abs(leftFrontDrive.getCurrentPosition()-leftFrontDrive.getTargetPosition())<=epsilon &&
-                Math.abs(rightFrontDrive.getCurrentPosition()-rightFrontDrive.getTargetPosition())<=epsilon &&
-                Math.abs(leftBackDrive.getCurrentPosition()-leftBackDrive.getTargetPosition())<=epsilon &&
-                Math.abs(rightBackDrive.getCurrentPosition()-rightBackDrive.getTargetPosition())<=epsilon;
+        leftDrive.setPower(power);
+        rightDrive.setPower(power);
     }
 
     public boolean atDriveTargetPosition(boolean isGoingForward) {
@@ -145,41 +41,28 @@ public class DriveTrain {
     }
 
     public boolean atDriveTargetPositionForward() {
-        return(leftFrontDrive.getCurrentPosition() >= leftFrontDrive.getTargetPosition() &&
-                rightFrontDrive.getCurrentPosition() >= rightFrontDrive.getTargetPosition() &&
-                leftBackDrive.getCurrentPosition() >= leftBackDrive.getTargetPosition() &&
-                rightBackDrive.getCurrentPosition() >= rightBackDrive.getTargetPosition());
+        return(leftDrive.getCurrentPosition() >= leftDrive.getTargetPosition() &&
+                rightDrive.getCurrentPosition() >= rightDrive.getTargetPosition());
     }
 
     public boolean atDriveTargetPositionBackward() {
-        return(leftFrontDrive.getCurrentPosition() <= leftFrontDrive.getTargetPosition() &&
-                rightFrontDrive.getCurrentPosition() <= rightFrontDrive.getTargetPosition() &&
-                leftBackDrive.getCurrentPosition() <= leftBackDrive.getTargetPosition() &&
-                rightBackDrive.getCurrentPosition() <= rightBackDrive.getTargetPosition());
+        return(leftDrive.getCurrentPosition() <= leftDrive.getTargetPosition() &&
+                rightDrive.getCurrentPosition() <= rightDrive.getTargetPosition());
     }
 
-    public void drive(double x, double y, double rot){
-        double lf_power = y + x + rot;
-        double rf_power = y - x - rot;
-        double lb_power = y - x + rot;
-        double rb_power = y + x - rot;
+    public void drive(double y, double rot){
+        double l_power = y + rot;
+        double r_power = y - rot;
 
         double max = 0.0;
-        max = Math.max(Math.abs(lf_power), Math.abs(rf_power));
-        max = Math.max(max, Math.abs(lb_power));
-        max = Math.max(max, Math.abs(rb_power));
+        max = Math.max(Math.abs(l_power), Math.abs(r_power));
 
         if (max > 1.0) {
-            lf_power /= max;
-            rf_power /= max;
-            lb_power /= max;
-            rb_power /= max;
+            l_power /= max;
+            r_power /= max;
         }
 
-
-        this.setLeftFrontPower(lf_power);
-        this.setRightFrontPower(rf_power);
-        this.setLeftBackPower(lb_power);
-        this.setRightBackPower(rb_power);
+        this.leftDrive.setPower(l_power);
+        this.rightDrive.setPower(r_power);
     }
 }
