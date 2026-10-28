@@ -64,13 +64,13 @@ public class DriveTrain {
     }
 
     public void setLeftDrivePower(double power) {
-        leftFrontDrive.setPower(power);
-        leftBackDrive.setPower(power);
+        setLeftFrontPower(power);
+        setLeftBackPower(power);
     }
 
     public void setRightDrivePower(double power) {
-        rightFrontDrive.setPower(power);
-        rightBackDrive.setPower(power);
+        setRightFrontPower(power);
+        setRightBackPower(power);
     }
 
     public void setAllDrivePower(double power) {
@@ -79,17 +79,17 @@ public class DriveTrain {
     }
 
     public void setStrafeLeftPower(double power){
-        leftFrontDrive.setPower(-power);
-        leftBackDrive.setPower(power);
-        rightFrontDrive.setPower(power);
-        rightBackDrive.setPower(-power);
+        setLeftFrontPower(-power);
+        setLeftBackPower(power);
+        setRightFrontPower(power);
+        setRightBackPower(-power);
     }
 
     public void setStrafeRightPower(double power){
-        leftFrontDrive.setPower(power);
-        leftBackDrive.setPower(-power);
-        rightFrontDrive.setPower(-power);
-        rightBackDrive.setPower(power);
+        setLeftFrontPower(power);
+        setLeftBackPower(-power);
+        setRightFrontPower(-power);
+        setRightBackPower(power);
     }
 
     public void setRotationClockwiseReset(int pos) {
@@ -115,17 +115,17 @@ public class DriveTrain {
     }
 
     public void rotateClockwise(double speed) {
-        leftFrontDrive.setPower(speed);
-        rightFrontDrive.setPower(-speed);
-        leftBackDrive.setPower(speed);
-        rightBackDrive.setPower(-speed);
+        setLeftFrontPower(speed);
+        setRightFrontPower(-speed);
+        setLeftBackPower(speed);
+        setRightBackPower(-speed);
     }
 
     public void rotateCounterClockwise(double speed) {
-        leftFrontDrive.setPower(-speed);
-        rightFrontDrive.setPower(speed);
-        leftBackDrive.setPower(-speed);
-        rightBackDrive.setPower(speed);
+        setLeftFrontPower(-speed);
+        setRightFrontPower(speed);
+        setLeftBackPower(-speed);
+        setRightBackPower(speed);
     }
 
     public boolean atDriveTargetPosition(int epsilon) {
