@@ -23,13 +23,13 @@ public class DriveTrain {
         leftFrontDrive.setPower(power);
     }
     public void setLeftBackPower(double power) {
-        leftBackDrive.setPower(power);
+        leftBackDrive.setPower(power / 2);
     }
     public void setRightFrontPower(double power) {
         rightFrontDrive.setPower(power);
     }
     public void setRightBackPower(double power) {
-        rightBackDrive.setPower(power);
+        rightBackDrive.setPower(power / 2);
     }
     public DcMotor getLeftFrontDrive() {
         return leftFrontDrive;
