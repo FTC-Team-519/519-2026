@@ -5,20 +5,31 @@ import com.qualcomm.robotcore.hardware.*;
 import org.firstinspires.ftc.robotcore.external.navigation.*;
 
 public class Robot {
-    private final DriveTrain driveTrain;
+//    private final DriveTrain driveTrain;
+
+
+
+    private final FlywheelTest flywheelTest;
     private final IMU_Wrapper imu_wrapper;
 
     public Robot(HardwareMap hardwareMap) {
-        driveTrain = new DriveTrain(hardwareMap);
+//        driveTrain = new DriveTrain(hardwareMap);
         imu_wrapper = new IMU_Wrapper(hardwareMap);
+        flywheelTest = new FlywheelTest(hardwareMap);
     }
 
 
-    public DriveTrain getDriveTrain() {
-        return driveTrain;
-    }
+//    public DriveTrain getDriveTrain() {
+//        return driveTrain;
+//    }
 
     public IMU_Wrapper getImu_wrapper() {
         return imu_wrapper;
     }
+
+    public FlywheelTest getFlywheelTest() {
+        return flywheelTest;
+    }
+
+
 }
