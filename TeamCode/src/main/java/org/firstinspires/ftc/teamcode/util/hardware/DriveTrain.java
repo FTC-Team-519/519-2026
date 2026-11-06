@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class DriveTrain {
+    public final static double BACK_MOTOR_ADJUSTMENT = 0.97;
+
     private final DcMotor leftFrontDrive,leftBackDrive,rightFrontDrive,rightBackDrive;
 
     public DriveTrain(HardwareMap hardwareMap) {
@@ -23,13 +25,13 @@ public class DriveTrain {
         leftFrontDrive.setPower(power);
     }
     public void setLeftBackPower(double power) {
-        leftBackDrive.setPower(power / 2);
+        leftBackDrive.setPower(power * BACK_MOTOR_ADJUSTMENT);
     }
     public void setRightFrontPower(double power) {
         rightFrontDrive.setPower(power);
     }
     public void setRightBackPower(double power) {
-        rightBackDrive.setPower(power / 2);
+        rightBackDrive.setPower(power * BACK_MOTOR_ADJUSTMENT);
     }
     public DcMotor getLeftFrontDrive() {
         return leftFrontDrive;
@@ -49,6 +51,7 @@ public class DriveTrain {
                 rightFrontDrive.getTargetPosition()==position && rightBackDrive.getTargetPosition()==position);
     }
 
+    //TODO! THIS IS OFF BY A LOT PROBABLY???
     public static double getCountsPerInchForDriveMotors() {
         final double     COUNTS_PER_MOTOR_REV    = 384.5  ;    // eg: Using 5203 Yellowjacket 435 RPM w/ given encoder
         final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // Simple Bevel Gear ratio is 2:1
