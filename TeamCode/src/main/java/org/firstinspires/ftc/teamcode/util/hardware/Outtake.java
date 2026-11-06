@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class Outtake {
-    private DcMotor flywheelMotor;
+    private final DcMotor flywheelMotor;
 
     public Outtake(HardwareMap hardwareMap){
         flywheelMotor = hardwareMap.get(DcMotor.class,"FlywheelMotor");
