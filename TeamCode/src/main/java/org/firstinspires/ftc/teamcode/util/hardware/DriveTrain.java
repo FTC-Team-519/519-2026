@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.util.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class DriveTrain {
@@ -15,9 +16,9 @@ public class DriveTrain {
         rightBackDrive = hardwareMap.get(DcMotor.class, "rightBack");
 
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
     }
 
 
@@ -164,8 +165,8 @@ public class DriveTrain {
     public void drive(double x, double y, double rot){
         double lf_power = y + x + rot;
         double rf_power = y - x - rot;
-        double lb_power = y - x + rot;
-        double rb_power = y + x - rot;
+        double lb_power = y + x - rot;
+        double rb_power = y - x + rot;
 
         double max = 0.0;
         max = Math.max(Math.abs(lf_power), Math.abs(rf_power));
