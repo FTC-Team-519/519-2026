@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Feeder {
-    public static final double POWER = 0.9;
+    public static final double POWER = 1.0;
     private CRServo feeder;
 
     public Feeder(HardwareMap hardwareMap){
