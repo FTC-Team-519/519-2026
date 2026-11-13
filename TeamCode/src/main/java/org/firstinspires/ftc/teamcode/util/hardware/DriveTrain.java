@@ -48,14 +48,14 @@ public class DriveTrain {
     }
 
     public boolean isTargetPositionsForDriveMotorsSet(int position) {
-        return(leftFrontDrive.getTargetPosition()==position && leftBackDrive.getTargetPosition()==position &&
-                rightFrontDrive.getTargetPosition()==position && rightBackDrive.getTargetPosition()==position);
+        return(leftFrontDrive.getTargetPosition()==position &&
+                rightFrontDrive.getTargetPosition()==position);
     }
 
     //TODO! THIS IS OFF BY A LOT PROBABLY???
     public static double getCountsPerInchForDriveMotors() {
-        final double     COUNTS_PER_MOTOR_REV    = 384.5  ;    // eg: Using 5203 Yellowjacket 435 RPM w/ given encoder
-        final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // Simple Bevel Gear ratio is 2:1
+        final double     COUNTS_PER_MOTOR_REV    = 1425.1;    // eg: Using 5203 Yellowjacket 117 RPM w/ given encoder
+        final double     DRIVE_GEAR_REDUCTION    = 2.0;     // Simple Bevel Gear ratio is 2:1
         final double     WHEEL_DIAMETER_INCHES   = 4;     // For figuring circumference
         return (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * Math.PI);
     }
@@ -98,24 +98,18 @@ public class DriveTrain {
 
     public void setRotationClockwiseReset(int pos) {
         leftFrontDrive.setTargetPosition(leftFrontDrive.getCurrentPosition()-pos);
-        leftBackDrive.setTargetPosition(leftBackDrive.getCurrentPosition()-pos);
         rightFrontDrive.setTargetPosition(rightFrontDrive.getCurrentPosition()+pos);
-        rightBackDrive.setTargetPosition(rightBackDrive.getCurrentPosition()+pos);
         setDriveMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void setRotationClockwise(int pos) {
         leftFrontDrive.setTargetPosition(leftFrontDrive.getCurrentPosition()-pos);
-        leftBackDrive.setTargetPosition(leftBackDrive.getCurrentPosition()-pos);
         rightFrontDrive.setTargetPosition(rightFrontDrive.getCurrentPosition()+pos);
-        rightBackDrive.setTargetPosition(rightBackDrive.getCurrentPosition()+pos);
     }
 
     public void setDriveTargetPosition(int position) {
         leftFrontDrive.setTargetPosition(position);
         rightFrontDrive.setTargetPosition(position);
-        leftBackDrive.setTargetPosition(position);
-        rightBackDrive.setTargetPosition(position);
     }
 
     public void rotateClockwise(double speed) {
@@ -134,9 +128,7 @@ public class DriveTrain {
 
     public boolean atDriveTargetPosition(int epsilon) {
         return Math.abs(leftFrontDrive.getCurrentPosition()-leftFrontDrive.getTargetPosition())<=epsilon &&
-                Math.abs(rightFrontDrive.getCurrentPosition()-rightFrontDrive.getTargetPosition())<=epsilon &&
-                Math.abs(leftBackDrive.getCurrentPosition()-leftBackDrive.getTargetPosition())<=epsilon &&
-                Math.abs(rightBackDrive.getCurrentPosition()-rightBackDrive.getTargetPosition())<=epsilon;
+                Math.abs(rightFrontDrive.getCurrentPosition()-rightFrontDrive.getTargetPosition())<=epsilon;
     }
 
     public boolean atDriveTargetPosition(boolean isGoingForward) {
@@ -150,16 +142,12 @@ public class DriveTrain {
 
     public boolean atDriveTargetPositionForward() {
         return(leftFrontDrive.getCurrentPosition() >= leftFrontDrive.getTargetPosition() &&
-                rightFrontDrive.getCurrentPosition() >= rightFrontDrive.getTargetPosition() &&
-                leftBackDrive.getCurrentPosition() >= leftBackDrive.getTargetPosition() &&
-                rightBackDrive.getCurrentPosition() >= rightBackDrive.getTargetPosition());
+                rightFrontDrive.getCurrentPosition() >= rightFrontDrive.getTargetPosition());
     }
 
     public boolean atDriveTargetPositionBackward() {
         return(leftFrontDrive.getCurrentPosition() <= leftFrontDrive.getTargetPosition() &&
-                rightFrontDrive.getCurrentPosition() <= rightFrontDrive.getTargetPosition() &&
-                leftBackDrive.getCurrentPosition() <= leftBackDrive.getTargetPosition() &&
-                rightBackDrive.getCurrentPosition() <= rightBackDrive.getTargetPosition());
+                rightFrontDrive.getCurrentPosition() <= rightFrontDrive.getTargetPosition());
     }
 
     public void drive(double x, double y, double rot){

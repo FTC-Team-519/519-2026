@@ -11,6 +11,6 @@ public class DoNothing extends AutoBase {
 
     @Override
     public SequentialCommandGroup create_routine() {
-        return new SequentialCommandGroup();
+        return new SequentialCommandGroup(telemetry);
     }
 }

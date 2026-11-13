@@ -18,8 +18,10 @@ public abstract class AutoBase extends OpModeBase {
 
     @Override
     public void loop() {
+        telemetry.addData("doing telementry", true);
         if (!seq.isDone()){
             seq.run();
+            telemetry.update();
         }
     }
 }
