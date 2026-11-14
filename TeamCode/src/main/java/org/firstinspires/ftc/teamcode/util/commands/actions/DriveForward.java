@@ -22,7 +22,8 @@ public class DriveForward implements Command {
     public void init() {
         this.driveTrain.setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.driveTrain.setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        this.driveTrain.setDriveTargetPosition((int)distance);
+        // FIXME: Not consitent with DriveTrain class
+        // this.driveTrain.setDriveTargetPosition((int)distance);
     }
     //    @Override
     public void run() {

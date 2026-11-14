@@ -25,7 +25,7 @@ public class DriveInDirection implements Command {
     public void init() {
         this.driveTrain.setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.driveTrain.setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        this.driveTrain.setDriveTargetPosition((int) distance); //we might need to tweak this value a bit
+        // FIXME: this.driveTrain.setDriveTargetPosition((int) distance); //we might need to tweak this value a bit
     }
 
     @Override
@@ -45,18 +45,21 @@ public class DriveInDirection implements Command {
         lb_power /= scale;
         rb_power /= scale;
 
-        driveTrain.setLeftFrontPower(lf_power);
-        driveTrain.setRightFrontPower(rf_power);
-        driveTrain.setLeftBackPower(lb_power);
-        driveTrain.setRightBackPower(rb_power);
+        // FIXME: None of these exist
+        //  driveTrain.setLeftFrontPower(lf_power);
+        //  driveTrain.setRightFrontPower(rf_power);
+        //  driveTrain.setLeftBackPower(lb_power);
+        //  driveTrain.setRightBackPower(rb_power);
     }
 
     @Override
     public boolean isDone() {
-        return Math.abs(driveTrain.getLeftFrontDrive().getCurrentPosition()) >= Math.abs(driveTrain.getLeftFrontDrive().getTargetPosition()) ||
-                Math.abs(driveTrain.getRightFrontDrive().getCurrentPosition()) >= Math.abs(driveTrain.getRightFrontDrive().getTargetPosition()) ||
-                Math.abs(driveTrain.getLeftBackDrive().getCurrentPosition()) >= Math.abs(driveTrain.getLeftBackDrive().getTargetPosition()) ||
-                Math.abs(driveTrain.getRightBackDrive().getCurrentPosition()) >= Math.abs(driveTrain.getRightBackDrive().getTargetPosition());
+        // FIXME: none of the operations below can compile against existing DriveTrain
+        return false;
+//        return Math.abs(driveTrain.getLeftFrontDrive().getCurrentPosition()) >= Math.abs(driveTrain.getLeftFrontDrive().getTargetPosition()) ||
+//                Math.abs(driveTrain.getRightFrontDrive().getCurrentPosition()) >= Math.abs(driveTrain.getRightFrontDrive().getTargetPosition()) ||
+//                Math.abs(driveTrain.getLeftBackDrive().getCurrentPosition()) >= Math.abs(driveTrain.getLeftBackDrive().getTargetPosition()) ||
+//                Math.abs(driveTrain.getRightBackDrive().getCurrentPosition()) >= Math.abs(driveTrain.getRightBackDrive().getTargetPosition());
     }
 
     @Override

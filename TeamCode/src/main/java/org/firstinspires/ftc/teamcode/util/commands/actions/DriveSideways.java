@@ -20,15 +20,15 @@ public class DriveSideways implements Command {
     public void init() {
         this.driveTrain.setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.driveTrain.setDriveMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        this.driveTrain.setDriveTargetPosition((int)distance);
+        // FIXME: this.driveTrain.setDriveTargetPosition((int)distance);
     }
 
     public void run() {
         if(distance>0) {
-            this.driveTrain.setStrafeRightPower(1.0);
+            // FIXME: this.driveTrain.setStrafeRightPower(1.0);
         }
         else if(distance<0) {
-            this.driveTrain.setStrafeLeftPower(1.0);
+            // FIXME: this.driveTrain.setStrafeLeftPower(1.0);
         }
     }
 
@@ -39,11 +39,13 @@ public class DriveSideways implements Command {
     }
 
     public boolean isDone() {
-        if(this.driveTrain.getLeftFrontDrive().getTargetPosition()>0) {
-            return this.driveTrain.getLeftFrontDrive().getCurrentPosition() >= this.driveTrain.getLeftFrontDrive().getTargetPosition();
-        }
-        else {
-            return this.driveTrain.getLeftFrontDrive().getCurrentPosition() <= this.driveTrain.getLeftFrontDrive().getTargetPosition();
-        }
+        return false;
+        // FIXME:
+//        if(this.driveTrain.getLeftFrontDrive().getTargetPosition()>0) {
+//            return this.driveTrain.getLeftFrontDrive().getCurrentPosition() >= this.driveTrain.getLeftFrontDrive().getTargetPosition();
+//        }
+//        else {
+//            return this.driveTrain.getLeftFrontDrive().getCurrentPosition() <= this.driveTrain.getLeftFrontDrive().getTargetPosition();
+//        }
     }
 }
