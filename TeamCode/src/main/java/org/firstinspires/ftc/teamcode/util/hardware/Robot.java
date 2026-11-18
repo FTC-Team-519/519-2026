@@ -7,18 +7,24 @@ import org.firstinspires.ftc.robotcore.external.navigation.*;
 public class Robot {
     private final DriveTrain driveTrain;
     private final IMU_Wrapper imu_wrapper;
+    private final Outtake outtake;
 
     public Robot(HardwareMap hardwareMap) {
         driveTrain = new DriveTrain(hardwareMap);
         imu_wrapper = new IMU_Wrapper(hardwareMap);
+        outtake = new Outtake(hardwareMap);
     }
 
 
     public DriveTrain getDriveTrain() {
         return driveTrain;
     }
+    public Outtake getOuttake() {
+        return outtake;
+    }
 
     public IMU_Wrapper getImu_wrapper() {
         return imu_wrapper;
     }
 }
+
