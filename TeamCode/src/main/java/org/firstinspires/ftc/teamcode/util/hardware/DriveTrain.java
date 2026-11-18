@@ -49,6 +49,7 @@ public class DriveTrain {
                 rightFrontDrive.getTargetPosition()==position && rightBackDrive.getTargetPosition()==position);
     }
 
+    //TODO! fix for motors we are actually using
     public static double getCountsPerInchForDriveMotors() {
         final double     COUNTS_PER_MOTOR_REV    = 384.5  ;    // eg: Using 5203 Yellowjacket 435 RPM w/ given encoder
         final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // Simple Bevel Gear ratio is 2:1
