@@ -1,21 +1,26 @@
 package org.firstinspires.ftc.teamcode.util.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 
 public class Outtake {
-    private final DcMotor flywheelMotor;
+    private static final double TICKS_PER_REVOLUTION = 28;
+    private final DcMotor flywheelMotor1, flywheelMotor2;
 
     public Outtake(HardwareMap hardwareMap){
-        flywheelMotor = hardwareMap.get(DcMotor.class,"FlywheelMotor");
+        flywheelMotor1 = hardwareMap.get(DcMotor.class,"FlywheelMotorA");
+        flywheelMotor2 = hardwareMap.get(DcMotor.class,"FlywheelMotorB");
+        flywheelMotor1.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void turnON(){
-        flywheelMotor.setPower(0.9);
+    public void set_power(double power){
+        flywheelMotor1.setPower(power);
+        flywheelMotor2.setPower(power);
     }
-    public void turnOff(){
-        flywheelMotor.setPower(0.0);
+    public double getRevolutionPosition() {
+        return flywheelMotor1.getCurrentPosition() / TICKS_PER_REVOLUTION;
     }
 }
