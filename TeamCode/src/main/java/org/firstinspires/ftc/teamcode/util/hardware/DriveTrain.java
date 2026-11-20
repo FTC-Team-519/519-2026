@@ -159,28 +159,32 @@ public class DriveTrain {
                 rightBackDrive.getCurrentPosition() <= rightBackDrive.getTargetPosition());
     }
 
-    public void drive(double x, double y, double rot){
-        double lf_power = y + x + rot;
-        double rf_power = y - x - rot;
-        double lb_power = y - x + rot;
-        double rb_power = y + x - rot;
+    // Thanks to FTC16072 for sharing this code!!
+    public void drive(double forward, double right, double rotate) {
+        // This calculates the power needed for each wheel based on the amount of forward,
+        // strafe right, and rotate
+        double frontLeftPower = forward + right + rotate;
+        double frontRightPower = forward - right - rotate;
+        double backRightPower = forward + right - rotate;
+        double backLeftPower = forward - right + rotate;
 
-        double max = 0.0;
-        max = Math.max(Math.abs(lf_power), Math.abs(rf_power));
-        max = Math.max(max, Math.abs(lb_power));
-        max = Math.max(max, Math.abs(rb_power));
+        double maxPower = 1.0;
+        double maxSpeed = 1.0;  // make this slower for outreaches
 
-        if (max > 1.0) {
-            lf_power /= max;
-            rf_power /= max;
-            lb_power /= max;
-            rb_power /= max;
-        }
+        // This is needed to make sure we don't pass > 1.0 to any wheel
+        // It allows us to keep all of the motors in proportion to what they should
+        // be and not get clipped
+        maxPower = Math.max(maxPower, Math.abs(frontLeftPower));
+        maxPower = Math.max(maxPower, Math.abs(frontRightPower));
+        maxPower = Math.max(maxPower, Math.abs(backRightPower));
+        maxPower = Math.max(maxPower, Math.abs(backLeftPower));
 
-
-        this.setLeftFrontPower(lf_power);
-        this.setRightFrontPower(rf_power);
-        this.setLeftBackPower(lb_power);
-        this.setRightBackPower(rb_power);
+        // We multiply by maxSpeed so that it can be set lower for outreaches
+        // When a young child is driving the robot, we may not want to allow full
+        // speed.
+        this.setLeftFrontPower(maxSpeed * (frontLeftPower / maxPower));
+        this.setRightFrontPower(maxSpeed * (frontRightPower / maxPower));
+        this.setLeftBackPower(maxSpeed * (backLeftPower / maxPower));
+        this.setRightBackPower(maxSpeed * (backRightPower / maxPower));
     }
 }
