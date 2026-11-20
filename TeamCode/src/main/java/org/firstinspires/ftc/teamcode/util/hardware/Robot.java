@@ -29,6 +29,6 @@ public class Robot {
         return imu_wrapper;
     }
 
-    public Intake getintake(){return intake;}
+    public Intake getIntake(){return intake;}
 }
 

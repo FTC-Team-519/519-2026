@@ -17,7 +17,7 @@ public class Outtake {
     }
 
     //set power of the outtake motors
-    public void setOuttakePower(double power) {
+    public void setPower(double power) {
         OuttakeMotorForward.setPower(power);
         OuttakeMotorReverse.setPower(power);
     }
