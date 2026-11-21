@@ -14,6 +14,10 @@ public class Outtake {
         flywheelMotor1 = hardwareMap.get(DcMotor.class,"FlywheelMotorA");
         flywheelMotor2 = hardwareMap.get(DcMotor.class,"FlywheelMotorB");
         flywheelMotor1.setDirection(DcMotorSimple.Direction.REVERSE);
+        flywheelMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        flywheelMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        flywheelMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        flywheelMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void set_power(double power){
