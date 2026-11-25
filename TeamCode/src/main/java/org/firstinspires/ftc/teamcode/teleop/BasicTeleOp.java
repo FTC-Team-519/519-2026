@@ -30,9 +30,8 @@ public class BasicTeleOp extends OpModeBase {
         telemetry.addLine("");
         telemetry.addLine("Moving the right joystick left and right turns the robot");
         telemetry.addData("Outtake Power", outtake_power);
-        telemetry.update();
         telemetry.addData("Revolution per Minute", (robot.getOuttake().getRevolutionPosition() - last_wheel_pos) * 60.0);
-
+        telemetry.update();
     }
 
     /*
@@ -51,9 +50,9 @@ public class BasicTeleOp extends OpModeBase {
 
     void handle_intake() {
         if (gamepad2.left_trigger > TRIGGER_THRESHOLD) {
-            robot.getIntake().setPower(0);
-        } else {
             robot.getIntake().setPower(1);
+        } else {
+            robot.getIntake().setPower(0);
         }
     }
 

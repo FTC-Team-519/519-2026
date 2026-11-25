@@ -11,6 +11,7 @@ public class IMU_Wrapper {
     public IMU_Wrapper(HardwareMap hardwareMap) {
         imu = hardwareMap.get(IMU.class, "imu");
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.DOWN, RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD)));
+        resetYaw();
     }
     
     public YawPitchRollAngles getOrientation(){

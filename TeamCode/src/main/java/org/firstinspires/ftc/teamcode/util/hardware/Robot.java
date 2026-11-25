@@ -12,8 +12,8 @@ public class Robot {
     private final Intake intake;
 
     public Robot(HardwareMap hardwareMap) {
-        driveTrain = new DriveTrain(hardwareMap);
         imu_wrapper = new IMU_Wrapper(hardwareMap);
+        driveTrain = new DriveTrain(hardwareMap, imu_wrapper);
         outtake = new Outtake(hardwareMap);
         intake = new Intake(hardwareMap);
     }

@@ -12,9 +12,9 @@ public class DriveTrain {
         this.imu = imu;
 
         leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
-        leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRight");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
+        leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
