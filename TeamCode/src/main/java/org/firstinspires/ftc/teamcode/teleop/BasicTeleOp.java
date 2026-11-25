@@ -24,6 +24,11 @@ public class BasicTeleOp extends OpModeBase {
     }
 
     private void handle_telemetry() {
+        telemetry.addLine("Press A to reset Yaw");
+        telemetry.addLine("Hold left bumper to drive in robot relative");
+        telemetry.addLine("The left joystick sets the robot direction");
+        telemetry.addLine("");
+        telemetry.addLine("Moving the right joystick left and right turns the robot");
         telemetry.addData("Outtake Power", outtake_power);
         telemetry.update();
         telemetry.addData("Revolution per Minute", (robot.getOuttake().getRevolutionPosition() - last_wheel_pos) * 60.0);
@@ -38,7 +43,10 @@ public class BasicTeleOp extends OpModeBase {
     void handle_driving() {
         //On the sticks, the y-axis is flipped so down is up and up is down.
         //To fix this, we just put a negative to flip it back to what is normal.
-        robot.getDriveTrain().drive(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+        robot.getDriveTrain().driveFieldRelative(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+        if (gamepad1.a && gamepad1.y) {
+            robot.getImu_wrapper().resetYaw();
+        }
     }
 
     void handle_intake() {

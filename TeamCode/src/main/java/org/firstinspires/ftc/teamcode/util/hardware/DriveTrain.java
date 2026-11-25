@@ -2,11 +2,15 @@ package org.firstinspires.ftc.teamcode.util.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class DriveTrain {
     private final DcMotor leftFrontDrive,leftBackDrive,rightFrontDrive,rightBackDrive;
 
-    public DriveTrain(HardwareMap hardwareMap) {
+    private final IMU_Wrapper imu;
+    public DriveTrain(HardwareMap hardwareMap, IMU_Wrapper imu) {
+        this.imu = imu;
+
         leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRight");
@@ -16,6 +20,13 @@ public class DriveTrain {
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+
+        // This uses RUN_USING_ENCODER to be more accurate.   If you don't have the encoder
+        // wires, you should remove these
+        leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
 
@@ -186,5 +197,22 @@ public class DriveTrain {
         this.setRightFrontPower(maxSpeed * (frontRightPower / maxPower));
         this.setLeftBackPower(maxSpeed * (backLeftPower / maxPower));
         this.setRightBackPower(maxSpeed * (backRightPower / maxPower));
+    }
+
+    // This routine drives the robot field relative
+    public void driveFieldRelative(double forward, double right, double rotate) {
+        // First, convert direction being asked to drive to polar coordinates
+        double theta = Math.atan2(forward, right);
+        double r = Math.hypot(right, forward);
+
+        // Second, rotate angle by the angle the robot is pointing
+        theta = AngleUnit.normalizeRadians(theta - imu.getYaw());
+
+        // Third, convert back to cartesian
+        double newForward = r * Math.sin(theta);
+        double newRight = r * Math.cos(theta);
+
+        // Finally, call the drive method with robot relative forward and right amounts
+        drive(newForward, newRight, rotate);
     }
 }
